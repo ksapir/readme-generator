@@ -1,10 +1,51 @@
-// TODO: Include packages needed for this application
+//Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// TODO: Create an array of questions for user input
-// inquirer.prompt([
-const questions = [
+// Template of README and generating README file
+const generateReadme = (answers) =>
+`# ${answers.title}
+
+## Description:
+- ${answers.description}
+
+## Table of Contents:
+- [Installation](#installation)
+- [Usage](#usage)
+- [Visual Sample](#visual)
+- [License](#license)
+- [Test](#test)
+- [Contributors](#contributors)
+- [Github](#github)
+- [Email](#email)
+
+## Installation:
+- ${answers.install}
+
+## Usage:
+- ${answers.usage}
+- ${answers.link}
+
+## Visual Sample:
+![${answers.picdescription}](${answers.filepath})
+
+## License:
+- ${answers.license}
+
+## Test:
+- ${answers.test}
+
+## Contributors:
+- ${answers.contributors}
+
+## Contact:
+- Github: ${answers.github}
+- Email: ${answers.email}
+`
+
+
+// Array of questions using inquirer pronpt
+inquirer.prompt([
     {
         type: 'input',
         message: 'What is the title of your project?',
@@ -17,8 +58,18 @@ const questions = [
     },
     {
         type: 'input',
+        message: 'There is an area to display an image of your project. What is the image of?',
+        name: 'picdescription',
+    },
+    {
+        type: 'input',
+        message: 'Input the file path to the image',
+        name: 'filepath',
+    },
+    {
+        type: 'input',
         message: 'Input instructions for installing',
-        name: 'intall',
+        name: 'install',
     },
     {
         type: 'input',
@@ -27,19 +78,24 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'Who contributed to this project?',
-        name: 'contributors',
+        message: 'Input the link to the walkthrough video',
+        name: 'link',
     },
     {
         type: 'list',
         message: 'Choose your license:',
-        choices: ['Option 1', 'Option 2', 'Option 3'],
+        choices: ['MIT License', 'BSD License', 'Apache License', 'None'],
         name: 'license'
     },
     {
         type: 'input',
         mnessage: 'Are there any tests for this project?',
         name: 'test',
+    },
+    {
+        type: 'input', 
+        message: 'Who contributed to this project?',
+        name: 'contributors',
     },
     {
         type: 'input',
@@ -51,18 +107,11 @@ const questions = [
         message: 'Enter your email address',
         name: 'email',
     },
-]
-// .then((answers)
+]).then((answers) => {
+    // Create a function to write README file
+    const content = generateReadme(answers);
 
-// console.log(questions)
+    fs.writeFile('README.md', content, (err) =>
+    err ? console.log('Error!') : console.log('File Created!'))
+})
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile('README.md', JSON.stringify(data,null,4));
-}
-
-// // TODO: Create a function to initialize app
-function init() {}
-
-// // Function call to initialize app
-init();
