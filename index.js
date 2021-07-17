@@ -24,7 +24,8 @@ const generateReadme = (answers) =>
 
 ## Usage:
 - ${answers.usage}
-- ${answers.link}
+- Or watch the walkthrough video here:
+${answers.link}
 
 ## Visual Sample:
 ![${answers.picdescription}](${answers.filepath})
