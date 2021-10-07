@@ -8,7 +8,6 @@
 - [Technologies](#tech)
 - [Contributors](#contributors)
 - [Github](#github)
-- [Email](#email)
 
 
 ## Usage:
